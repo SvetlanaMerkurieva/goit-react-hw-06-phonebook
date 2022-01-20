@@ -1,7 +1,17 @@
-import { createStore } from 'redux';
-import shortid from 'shortid';
+import { createStore, combineReducers } from 'redux';
+import contactsReducer from './reducer';
 
-const initialState = { contacts: [], filter: '' };
+const rootReducer = combineReducers({
+  contacts: contactsReducer,
+});
+
+const store = createStore(rootReducer);
+
+export default store;
+
+
+
+/*const initialState = { contacts: [], filter: '' };
 
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -33,4 +43,4 @@ const reducer = (state = initialState, { type, payload }) => {
   }
 };
 
-export const store = createStore({ reducer });
+export const store = createStore({ reducer });*/
