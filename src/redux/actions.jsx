@@ -1,6 +1,12 @@
+import shortid from "shortid";
+
 export const addContact = data => ({
   type: 'ADD_CONTACT',
-  payload: data,
+  payload: {
+        id: shortid.generate(),
+        name: data.name,
+        number: data.number,
+      },
 });
 
 export const deleteContact = contactId => ({
