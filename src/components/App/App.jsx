@@ -10,49 +10,13 @@ function App({
   filter,
   onAddContact,
   onDeleteContact,
-  onGhangeFilter,
+  onChangeFilter,
 }) {
   /* const localStorageKey = 'contacts';
 
   useEffect(() => {
     localStorage.setItem(localStorageKey, JSON.stringify(contacts));
-  }, [contacts]);
-
-  const handleFormSubmit = data => {
-    const isContact = contacts.find(({ name }) => name === data.name);
-
-    if (isContact) {
-      return window.alert(`Контакт с именем ${data.name} уже существет`);
-    } else {
-      const contact = {
-        id: shortid.generate(),
-        name: data.name,
-        number: data.number,
-      };
-
-      setContacts(prevState => [...prevState, contact]);
-    }
-  };
-
-  const deleteContact = contactId => {
-    setContacts(prevState => {
-      return prevState.filter(contact => contact.id !== contactId);
-    });
-  };
-
-  const changeFilter = e => {
-    const value = e.target.value;
-    setFilter(value);
-  };*/
-
-  const getVisibleContact = () => {
-    const normalValueFilter = filter.toLowerCase();
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalValueFilter),
-    );
-  };
-
-  const visibleContacts = getVisibleContact();
+  }, [contacts]);*/
 
   return (
     <div className={s.app}>
@@ -60,28 +24,35 @@ function App({
         <h2 className={s.title}>Телефонная книга</h2>
         <ContactForm onSubmit={onAddContact} />
         <h3 className={s.title}>Контакты</h3>
-        <Filter value={filter} onChange={onGhangeFilter} />
-        <ContactList
-          contacts={visibleContacts}
-          onDeleteContact={onDeleteContact}
-        />
+        <Filter value={filter} onChange={onChangeFilter} />
+        <ContactList contacts={contacts} onDeleteContact={onDeleteContact} />
       </header>
     </div>
   );
 }
 
+const getVisibleContact = (contacts, filter) => {
+  const normalValueFilter = filter.toLowerCase();
+  return contacts.filter(contact =>
+    contact.name.toLowerCase().includes(normalValueFilter),
+  );
+};
+
 const mapStateToProps = state => {
+  const { filter, items } = state.contacts;
+  const visibleContacts = getVisibleContact(items, filter);
   return {
-    contacts: state.contacts,
-    filter: state.filter,
+    contacts: visibleContacts,
+    filter: state.contacts.filter,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAddContact: () => dispatch(actions.addContact()),
-    onDeleteContact: () => dispatch(actions.deleteContact()),
-    onChangeFilter: () => dispatch(actions.filterContacts()),
+    onAddContact: ({ name, number }) =>
+      dispatch(actions.addContact({ name, number })),
+    onDeleteContact: id => dispatch(actions.deleteContact(id)),
+    onChangeFilter: e => dispatch(actions.filterContacts(e.target.value)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(App);
