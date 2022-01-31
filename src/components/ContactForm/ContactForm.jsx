@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import s from './ContactForm.module.css';
 
-export const ContactForm = ({ onSubmit }) => {
+export const ContactForm = ({ onSubmit, contacts }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -11,9 +11,16 @@ export const ContactForm = ({ onSubmit }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    onSubmit({ name, number });
-    setName('');
-    setNumber('');
+
+    const isContact = contacts.find(contact => contact.name === name);
+
+    if (isContact) {
+      return window.alert(`Контакт с именем ${name} уже существет`);
+    } else {
+      onSubmit({ name, number });
+      setName('');
+      setNumber('');
+    }
   };
 
   return (

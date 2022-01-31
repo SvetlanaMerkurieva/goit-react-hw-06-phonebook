@@ -12,17 +12,11 @@ function App({
   onDeleteContact,
   onChangeFilter,
 }) {
-  /* const localStorageKey = 'contacts';
-
-  useEffect(() => {
-    localStorage.setItem(localStorageKey, JSON.stringify(contacts));
-  }, [contacts]);*/
-
   return (
     <div className={s.app}>
       <header className={s.appHeader}>
         <h2 className={s.title}>Телефонная книга</h2>
-        <ContactForm onSubmit={onAddContact} />
+        <ContactForm onSubmit={onAddContact} contacts={contacts} />
         <h3 className={s.title}>Контакты</h3>
         <Filter value={filter} onChange={onChangeFilter} />
         <ContactList contacts={contacts} onDeleteContact={onDeleteContact} />
