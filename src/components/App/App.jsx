@@ -1,25 +1,23 @@
-import { connect } from 'react-redux';
-import * as actions from '../../redux/actions';
 import { ContactForm } from '../ContactForm/ContactForm';
 import { Filter } from '../Filter/Filter';
 import { ContactList } from '../ContactList/ContactList';
 import s from './App.module.css';
 
-function App({ contacts, filter, onDeleteContact, onChangeFilter }) {
+function App() {
   return (
     <div className={s.app}>
       <header className={s.appHeader}>
         <h2 className={s.title}>Телефонная книга</h2>
         <ContactForm />
         <h3 className={s.title}>Контакты</h3>
-        <Filter value={filter} onChange={onChangeFilter} />
-        <ContactList contacts={contacts} onDeleteContact={onDeleteContact} />
+        <Filter />
+        <ContactList />
       </header>
     </div>
   );
 }
 
-const getVisibleContact = (contacts, filter) => {
+/*const getVisibleContact = (contacts, filter) => {
   const normalValueFilter = filter.toLowerCase();
   return contacts.filter(contact =>
     contact.name.toLowerCase().includes(normalValueFilter),
@@ -42,5 +40,5 @@ const mapDispatchToProps = dispatch => {
     onDeleteContact: id => dispatch(actions.deleteContact(id)),
     onChangeFilter: e => dispatch(actions.filterContacts(e.target.value)),
   };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+};*/
+export default App;

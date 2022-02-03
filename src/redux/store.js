@@ -16,3 +16,5 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
+
+console.log(store.getState().contacts.filter);
