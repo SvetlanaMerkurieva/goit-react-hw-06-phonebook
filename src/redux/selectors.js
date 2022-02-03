@@ -1,20 +1,19 @@
-/*import { createSelector } from '@reduxjs/toolkit';*/
-import { store } from './store';
+import { createSelector } from '@reduxjs/toolkit';
 
-/*export const getContacts = state => state.contacts.items;
-console.log(getContacts());*/
+export const getContacts = state => state.contacts.items;
 
-export const getContacts = () => store.getState().contacts.items;
+export const getFilterValue = state => state.contacts.filter;
 
-export const getFilterValue = () => store.getState().contacts.filter;
-
-export const getVisibleContact = (contacts, filter) => {
-  const normalValueFilter = filter.toLowerCase();
-  return contacts.filter(contact =>
-    contact.name.toLowerCase().includes(normalValueFilter),
-  );
-};
+export const getVisibleContact = createSelector(
+  getContacts,
+  getFilterValue,
+  (contacts, filter) => {
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase()),
+    );
+  },
+);
 
 /*export const findContact = createSelector(getContacts, contacts => {
   return contacts.find(contact => contact.name === name);
-});*/
+}); = не знает, что такое name, пишет Unexpected use of 'name', а я не знаю как его сюда передать*/

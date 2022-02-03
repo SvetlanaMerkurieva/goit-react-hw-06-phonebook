@@ -1,12 +1,12 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteContact } from '../../redux/actions';
-import { getContacts } from '../../redux/selectors';
+import { getVisibleContact } from '../../redux/selectors';
 import { IconButton } from '../IconButton/IconButton';
 import { ReactComponent as AddIcon } from '../../icons/bin.svg';
 import s from './ContactList.module.css';
 
 export const ContactList = () => {
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(getVisibleContact);
   const dispatch = useDispatch();
 
   return (

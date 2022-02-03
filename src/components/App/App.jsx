@@ -17,28 +17,4 @@ function App() {
   );
 }
 
-/*const getVisibleContact = (contacts, filter) => {
-  const normalValueFilter = filter.toLowerCase();
-  return contacts.filter(contact =>
-    contact.name.toLowerCase().includes(normalValueFilter),
-  );
-};
-
-const mapStateToProps = state => {
-  const { filter, items } = state.contacts;
-  const visibleContacts = getVisibleContact(items, filter);
-  return {
-    contacts: visibleContacts,
-    filter: state.contacts.filter,
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onAddContact: ({ name, number }) =>
-      dispatch(actions.addContact({ name, number })),
-    onDeleteContact: id => dispatch(actions.deleteContact(id)),
-    onChangeFilter: e => dispatch(actions.filterContacts(e.target.value)),
-  };
-};*/
 export default App;
