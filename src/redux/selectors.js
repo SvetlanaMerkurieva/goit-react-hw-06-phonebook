@@ -13,7 +13,3 @@ export const getVisibleContact = createSelector(
     );
   },
 );
-
-/*export const findContact = createSelector(getContacts, contacts => {
-  return contacts.find(contact => contact.name === name);
-}); = не знает, что такое name, пишет Unexpected use of 'name', а я не знаю как его сюда передать*/
